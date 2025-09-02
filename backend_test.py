@@ -77,9 +77,9 @@ class MonasteryAPITester:
     def test_search_monasteries(self):
         """Test monastery search functionality"""
         test_cases = [
-            ("Tibet", "search=Tibet"),
-            ("Buddhist", "search=Buddhist"), 
-            ("Greece", "search=Greece")
+            ("Rumtek", "search=Rumtek"),
+            ("Nyingma", "search=Nyingma"), 
+            ("Gangtok", "search=Gangtok")
         ]
         
         for search_term, params in test_cases:
@@ -92,35 +92,55 @@ class MonasteryAPITester:
             if success and isinstance(response, list):
                 print(f"   Search '{search_term}' returned {len(response)} results")
 
-    def test_filter_by_country(self):
-        """Test filtering by country"""
-        success, response = self.run_test(
-            "Filter by Country - Greece",
-            "GET",
-            "monasteries?country=Greece",
-            200
-        )
-        if success and isinstance(response, list):
-            print(f"   Greece filter returned {len(response)} results")
+    def test_filter_by_district(self):
+        """Test filtering by district"""
+        test_cases = [
+            ("East Sikkim", "district=East Sikkim"),
+            ("West Sikkim", "district=West Sikkim")
+        ]
+        
+        for district, params in test_cases:
+            success, response = self.run_test(
+                f"Filter by District - {district}",
+                "GET",
+                f"monasteries?{params}",
+                200
+            )
+            if success and isinstance(response, list):
+                print(f"   {district} filter returned {len(response)} results")
 
     def test_filter_by_tradition(self):
         """Test filtering by tradition"""
-        success, response = self.run_test(
-            "Filter by Tradition - Tibetan Buddhism",
-            "GET",
-            "monasteries?tradition=Tibetan Buddhism",
-            200
-        )
-        if success and isinstance(response, list):
-            print(f"   Tibetan Buddhism filter returned {len(response)} results")
+        test_cases = [
+            ("Nyingma", "tradition=Nyingma"),
+            ("Kagyu", "tradition=Kagyu")
+        ]
+        
+        for tradition, params in test_cases:
+            success, response = self.run_test(
+                f"Filter by Tradition - {tradition}",
+                "GET",
+                f"monasteries?{params}",
+                200
+            )
+            if success and isinstance(response, list):
+                print(f"   {tradition} filter returned {len(response)} results")
 
-    def test_get_countries(self):
-        """Test getting countries list"""
-        return self.run_test("Get Countries", "GET", "countries", 200)
+    def test_get_districts(self):
+        """Test getting districts list"""
+        return self.run_test("Get Districts", "GET", "districts", 200)
 
     def test_get_traditions(self):
         """Test getting traditions list"""
         return self.run_test("Get Traditions", "GET", "traditions", 200)
+    
+    def test_get_festivals(self):
+        """Test getting all festivals"""
+        return self.run_test("Get All Festivals", "GET", "festivals", 200)
+    
+    def test_get_travel_guide(self):
+        """Test getting travel guide"""
+        return self.run_test("Get Travel Guide", "GET", "travel-guide", 200)
 
     def test_ai_chat(self, monastery_id=None):
         """Test AI chat functionality"""
