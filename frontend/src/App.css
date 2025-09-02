@@ -1,34 +1,311 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #fef7e0 0%, #fed7aa 50%, #fecaca 100%);
+  min-height: 100vh;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+.App {
+  position: relative;
 }
 
-.App-link {
-    color: #61dafb;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d97706;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b45309;
+}
+
+/* Headings with elegant font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+}
+
+/* Smooth transitions for interactive elements */
+button, .card, .monastery-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+/* Card hover effects */
+.monastery-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.6s ease-out;
+}
+
+/* Text selection */
+::selection {
+  background: #fcd34d;
+  color: #92400e;
+}
+
+/* Focus styles */
+input:focus, select:focus, button:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #d97706;
+  ring-offset: 2px;
+}
+
+/* Loading spinner */
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #d97706;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  .text-xl {
+    font-size: 1.125rem;
+  }
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Custom button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #b45309 0%, #c2410c 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(217, 119, 6, 0.3);
+}
+
+/* Chat message styles */
+.chat-message {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Tour viewer styles */
+.tour-viewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  z-index: 9999;
+}
+
+/* Hotspot pulse animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.hotspot {
+  animation: pulse 2s infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card grid responsive */
+.monastery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+@media (max-width: 640px) {
+  .monastery-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+}
+
+/* Image lazy loading effect */
+.lazy-image {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lazy-image.loaded {
+  opacity: 1;
+}
+
+/* Search input enhancements */
+.search-input {
+  position: relative;
+}
+
+.search-input::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(217, 119, 6, 0.1) 100%);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.search-input:focus-within::before {
+  opacity: 1;
+}
+
+/* Custom badge styles */
+.tradition-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: rgba(217, 119, 6, 0.1);
+  color: #92400e;
+  border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card {
+    border: 2px solid #000;
+  }
+  
+  .btn-primary {
+    border: 2px solid #000;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(135deg, #1f2937 0%, #374151 50%, #4b5563 100%);
+    color: #f9fafb;
+  }
+  
+  .card {
+    background: rgba(31, 41, 55, 0.8);
+    border: 1px solid rgba(75, 85, 99, 0.3);
+  }
+}
+
+/* Print styles */
+@media print {
+  .btn-primary, .search-input, .filters {
+    display: none;
+  }
+  
+  .monastery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
 }
