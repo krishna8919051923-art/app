@@ -211,13 +211,18 @@ def main():
     # Test search and filtering
     print("\n🔍 Testing Search and Filtering...")
     tester.test_search_monasteries()
-    tester.test_filter_by_country()
+    tester.test_filter_by_district()
     tester.test_filter_by_tradition()
     
     # Test filter options
     print("\n📋 Testing Filter Options...")
-    tester.test_get_countries()
+    tester.test_get_districts()
     tester.test_get_traditions()
+    
+    # Test new Sikkim-specific endpoints
+    print("\n🎭 Testing Sikkim-Specific Endpoints...")
+    tester.test_get_festivals()
+    tester.test_get_travel_guide()
     
     # Test AI chat integration
     print("\n🤖 Testing AI Chat Integration...")
