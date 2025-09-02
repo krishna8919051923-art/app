@@ -143,27 +143,35 @@ class MonasteryAPITester:
         return self.run_test("Get Travel Guide", "GET", "travel-guide", 200)
 
     def test_ai_chat(self, monastery_id=None):
-        """Test AI chat functionality"""
-        chat_data = {
-            "message": "Tell me about the history of this monastery",
-            "session_id": self.session_id,
-            "monastery_id": monastery_id
-        }
+        """Test AI chat functionality with Sikkim-specific questions"""
+        test_questions = [
+            "Tell me about Rumtek Monastery history",
+            "What permits do I need to visit Sikkim?",
+            "When is the best time to visit?",
+            "What festivals are celebrated at this monastery?"
+        ]
         
-        success, response = self.run_test(
-            "AI Chat Integration",
-            "POST",
-            "chat",
-            200,
-            data=chat_data
-        )
-        
-        if success:
-            if 'response' in response:
-                print(f"   AI Response length: {len(response['response'])} characters")
-                print(f"   AI Response preview: {response['response'][:100]}...")
-            else:
-                print("   Warning: No 'response' field in AI chat response")
+        for question in test_questions:
+            chat_data = {
+                "message": question,
+                "session_id": self.session_id,
+                "monastery_id": monastery_id
+            }
+            
+            success, response = self.run_test(
+                f"AI Chat - {question[:30]}...",
+                "POST",
+                "chat",
+                200,
+                data=chat_data
+            )
+            
+            if success:
+                if 'response' in response:
+                    print(f"   AI Response length: {len(response['response'])} characters")
+                    print(f"   AI Response preview: {response['response'][:100]}...")
+                else:
+                    print("   Warning: No 'response' field in AI chat response")
         
         return success, response
 
